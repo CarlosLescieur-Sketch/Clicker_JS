@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class = "conta" id="contador">0</h1>
+    <button class = "boton_principal" onclick="PlushFunction()">Click Me</button>
+    <button class="boton_compra" onclick="MultiFunc()">Comprar (1.5x profit)</button>
+    <script>
+        let contador = 0;
+        let multi = 1, costo = 50;
+        function MultiFunc(){
+            if(contador > costo){
+                contador = contador - costo;
+                console.log("Contador", contador)
+                document.getElementById("contador").textContent=contador;
+                costo = costo * 1.105;
+                multi++;
+            } else{
+                prompt("Saldo insuficiente");
+            }
+        }
+
+        function PlushFunction(){
+            contador = contador + 1 * multi;
+            console.log("Contador", contador);
+            document.getElementById("contador").textContent = contador;
+        }
+    </script>
+    <style>
+        .boton_principal{
+            position: relative;
+            left: 450px;
+            top: 30px;;
+            text-align: center;
+            height: 100px;
+            width: 350px;
+        }
+        .conta{
+            position: relative;
+            left: 625px; 
+            top: 20px;
+            color: rgb(23, 23, 56);
+        }
+    </style>
+</body>
+</html>
