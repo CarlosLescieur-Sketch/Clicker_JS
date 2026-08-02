@@ -1,0 +1,214 @@
+:root {
+    --bg: #17112B;
+    --surface: #241C3D;
+    --surface-border: #3A2E5C;
+    --text: #F0EBFF;
+    --text-muted: #A99FC7;
+    --gold: #FFB84D;
+    --pink: #FF5D8F;
+    --green: #6FE3A8;
+
+    --font-display: "Press Start 2P", monospace;
+    --font-body: "Space Grotesk", sans-serif;
+
+    --radius: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background:
+        radial-gradient(circle at 20% 45%, rgba(255, 93, 143, 0.12), transparent 45%),
+        radial-gradient(circle at 80% 85%, rgba(255, 184, 77, 0.10), transparent 45%),
+        var(--bg);
+    font-family: var(--font-body);
+    color: var(--text);
+}
+
+.arcade {
+    width: 100%;
+    max-width: 420px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 20px;
+    padding: 32px 28px 36px;
+    box-shadow:
+        0 30px 60px -20px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.arcade__header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.arcade__eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.arcade__title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.4;
+    margin: 0;
+    color: var(--gold);
+    text-shadow: 0 0 18px rgba(255, 184, 77, 0.35);
+}
+
+.stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius);
+    padding: 14px 12px;
+    text-align: center;
+}
+
+.stat-card__label {
+    margin: 0 0 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.stat-card__value {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 18px;
+}
+
+.stat-card--multi .stat-card__value {
+    color: var(--pink);
+}
+
+.stat-card--precio .stat-card__value {
+    color: var(--gold);
+}
+
+.counter-display {
+    background: #0F0B1E;
+    border: 2px solid var(--surface-border);
+    border-radius: var(--radius);
+    padding: 22px 16px;
+    text-align: center;
+    position: relative;
+    animation: screen-pulse 3.2s ease-in-out infinite;
+}
+
+.counter-display__label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.counter-display__value {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 40px;
+    color: var(--green);
+    text-shadow: 0 0 22px rgba(111, 227, 168, 0.45);
+}
+
+@keyframes screen-pulse {
+    0%, 100% { border-color: var(--surface-border); }
+    50% { border-color: rgba(111, 227, 168, 0.4); }
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.btn:active {
+    transform: translateY(2px) scale(0.99);
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--text);
+    outline-offset: 3px;
+}
+
+.btn--primary {
+    background: var(--pink);
+    color: #1A0E17;
+    box-shadow: 0 8px 20px -6px rgba(255, 93, 143, 0.55);
+}
+
+.btn--primary:hover {
+    filter: brightness(1.08);
+}
+
+.btn--upgrade {
+    background: transparent;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn--upgrade:hover {
+    background: rgba(255, 184, 77, 0.08);
+}
+
+.btn__badge {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+@media (max-width: 380px) {
+    .arcade__title {
+        font-size: 18px;
+    }
+    .counter-display__value {
+        font-size: 32px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .counter-display {
+        animation: none;
+    }
+    .btn {
+        transition: none;
+    }
+}

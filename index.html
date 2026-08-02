@@ -3,24 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Clicker Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
-    <h1 class = "conta" id="contador">0</h1>
-    <button class = "boton_principal" onclick="PlushFunction()">Click Me</button>
-    <button class="boton_compra" onclick="MultiFunc()">Comprar (1.5x profit)</button>
+
+    <div class="scene">
+
+        <model-viewer
+            class="scene__model"
+            src="Maquina-Arcade.glb"
+            camera-controls
+            disable-zoom
+            auto-rotate
+            auto-rotate-delay="0"
+            rotation-per-second="12deg"
+            camera-orbit="-35deg 78deg 3.2m"
+            camera-target="0m 0.6m 0m"
+            field-of-view="28deg"
+            shadow-intensity="1"
+            exposure="0.95"
+            environment-image="neutral"
+            interaction-prompt="none">
+        </model-viewer>
+
+        <main class="arcade">
+
+            <header class="arcade__header">
+                <span class="arcade__eyebrow">Sala de máquinas</span>
+                <h1 class="arcade__title">Coin Clicker</h1>
+            </header>
+
+            <section class="stat-row">
+                <div class="stat-card stat-card--multi">
+                    <h2 class="stat-card__label">Multiplicador</h2>
+                    <p class="stat-card__value" id="Multiplicador">1</p>
+                </div>
+
+                <div class="stat-card stat-card--precio">
+                    <h2 class="stat-card__label">Precio de mejora</h2>
+                    <p class="stat-card__value" id="Costo">:precio:</p>
+                </div>
+            </section>
+
+            <section class="counter-display">
+                <h2 class="counter-display__label">Puntos</h2>
+                <p class="counter-display__value" id="contador">0</p>
+            </section>
+
+            <section class="controls">
+                <button class="btn btn--primary" onclick="PlushFunction()">
+                    Click Me
+                </button>
+                <button class="btn btn--upgrade" onclick="MultiFunc()">
+                    Comprar <span class="btn__badge">1.5x profit</span>
+                </button>
+            </section>
+
+        </main>
+
+    </div>
+
     <script>
-        let contador = 0;
-        let multi = 1, costo = 50;
+        let multi = 1, costo = 50, contador = 0;
+
+        function init(){
+            document.getElementById("Costo").textContent = costo;
+        }
+        window.addEventListener("DOMContentLoaded", init);
+
         function MultiFunc(){
-            if(contador > costo){
+            if(contador >= costo){
                 contador = contador - costo;
                 console.log("Contador", contador)
                 document.getElementById("contador").textContent=contador;
-                costo = costo * 1.105;
+
+                costo = Math.round(costo * 1.105);
+                document.getElementById("Costo").textContent = costo;
+
                 multi++;
+                console.log("Multiplicador", multi)
+                document.getElementById("Multiplicador").textContent=multi;
             } else{
-                prompt("Saldo insuficiente");
+                alert("Saldo insuficiente");
             }
         }
 
@@ -30,21 +98,6 @@
             document.getElementById("contador").textContent = contador;
         }
     </script>
-    <style>
-        .boton_principal{
-            position: relative;
-            left: 450px;
-            top: 30px;;
-            text-align: center;
-            height: 100px;
-            width: 350px;
-        }
-        .conta{
-            position: relative;
-            left: 625px; 
-            top: 20px;
-            color: rgb(23, 23, 56);
-        }
-    </style>
+
 </body>
 </html>
